@@ -807,12 +807,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 7M2A8Q929Y;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TwitterApp_Prefix.pch;
 				HEADER_SEARCH_PATHS = "$(SDK_ROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "TwitterApp-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TwitterApp.karos;
 				PRODUCT_NAME = TwitterApp;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
@@ -824,10 +826,12 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 7M2A8Q929Y;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TwitterApp_Prefix.pch;
 				HEADER_SEARCH_PATHS = "$(SDK_ROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "TwitterApp-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TwitterApp.karos;
 				PRODUCT_NAME = TwitterApp;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";

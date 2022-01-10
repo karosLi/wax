@@ -23,7 +23,8 @@ function numberOfSectionsInTableView(self, tableView)
 end
 
 function tableView_numberOfRowsInSection(self, tableView, section)
-  return #self.trends
+  -- return #self.trends
+    return 20
 end
 
 function tableView_cellForRowAtIndexPath(self, tableView, indexPath)  
@@ -32,7 +33,8 @@ function tableView_cellForRowAtIndexPath(self, tableView, indexPath)
                UITableViewCell:initWithStyle_reuseIdentifier(UITableViewCellStyleDefault, identifier)  
 
   local object = self.trends[indexPath:row() + 1] -- Must +1 because lua arrays are 1 based
-  cell:textLabel():setText(object["name"])
+  -- cell:textLabel():setText(object["name"])
+  cell:textLabel():setText("1")
 
   return cell
 end
