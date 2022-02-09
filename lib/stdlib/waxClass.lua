@@ -8,8 +8,11 @@ end
 function waxInlineClass(options)
   local className = options[1]
   local superclassName = options[2]
+  print("waxInlineClass start")
   local class = wax.class(className, superclassName)
+  
   class.className = className
+  print("waxInlineClass end", class.className)
 
   if options.protocols then
     if type(options.protocols) ~= "table" then options.protocols = {options.protocols} end
@@ -19,7 +22,7 @@ function waxInlineClass(options)
   for i, protocol in ipairs(options.protocols or {}) do
     wax.class.addProtocols(class, protocol)
   end
-
+  
   class._M = setmetatable({
       self = class,
     },

@@ -12,18 +12,64 @@
 #import "lauxlib.h"
 #import "wax_block_transfer.h"
 
+void wax_traverse_table(lua_State *L, int index)
+{
+    lua_pushnil(L);
+    while (lua_next(L, index)) {
+        lua_pushvalue(L, -2);
+        const char* key = lua_tostring(L, -1);
+        int type = lua_type(L, -2);
+        printf("%s => type %s", key, lua_typename(L, type));
+        switch (type) {
+            case LUA_TNUMBER:
+                printf(" value=%f", lua_tonumber(L, -2));
+                break;
+            case LUA_TSTRING:
+                printf(" value=%s", lua_tostring(L, -2));
+                break;
+            case LUA_TFUNCTION:
+                if (lua_iscfunction(L, -2)) {
+                    printf(" C:%p", lua_tocfunction(L, -2));
+                }
+        }
+        printf("\n");
+        lua_pop(L, 2);
+    }
+}
 
 void wax_printStack(lua_State *L) {
-    int i;
+    printf("------------ kkp_stackDump begin ------------\n");
     int top = lua_gettop(L);
-    
-    for (i = 1; i <= top; i++) {
-        printf("%d: ", i);
-        wax_printStackAt(L, i);
+    for (int i = 0; i < top; i++) {
+        int positive = top - i;
+        int negative = -(i + 1);
+        int type = lua_type(L, positive);
+        int typeN = lua_type(L, negative);
+        assert(type == typeN);
+        const char* typeName = lua_typename(L, type);
+        printf("%d/%d: type=%s", positive, negative, typeName);
+        switch (type) {
+            case LUA_TNUMBER:
+                printf(" value=%f", lua_tonumber(L, positive));
+                break;
+            case LUA_TSTRING:
+                printf(" value=%s", lua_tostring(L, positive));
+                break;
+            case LUA_TFUNCTION:
+                if (lua_iscfunction(L, positive)) {
+                    printf(" C:%p", lua_tocfunction(L, positive));
+                }
+            case LUA_TTABLE:
+                if (lua_istable(L, positive)) {
+                    printf("\nvalue=\n{\n");
+                    wax_traverse_table(L, positive);
+                    printf("}\n");
+                }
+                break;
+        }
         printf("\n");
     }
-    
-    printf("\n");
+    printf("------------ kkp_stackDump end ------------\n\n");
 }
 
 void wax_printStackAt(lua_State *L, int i) {

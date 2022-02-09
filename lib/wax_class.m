@@ -69,7 +69,14 @@ static int __index(lua_State *L) {
 }
 
 // Creates a new ObjC class
-static int __call(lua_State *L) {   
+// __call: 函数调用操作 func(args)。 当 Lua 尝试调用一个非函数的值的时候会触发这个事件 （即 func 不是一个函数）。 查找 func 的元方法， 如果找得到，就调用这个元方法， func 作为第一个参数传入，原来调用的参数（args）后依次排在后面。
+// 比如 a = {}
+// meta_table = { __call = function(self, arg1, arg2, arg3...) print(self, arg1, arg2) end}
+// setmetatable(a, meta_table)
+// a({key: "hello"}, {key: "world"})
+// 这里的 self 就是 a, arg1 是 {key: "hello"}， arg2 是 {key: "world"}
+static int __call(lua_State *L) {
+    wax_printStack(L);
     const char *className = luaL_checkstring(L, 2);
     Class klass = objc_getClass(className);
     
@@ -159,6 +166,11 @@ static int name(lua_State *L) {
 }
 
 static void setValueForUndefinedKey(id self, SEL cmd, id value, NSString *key) {
+    const char *key1 = key.UTF8String;
+    if (strcmp(key1, "trends") == 0) {
+        NSLog(@"");
+    }
+    
     lua_State *L = wax_currentLuaState();
     
     BEGIN_STACK_MODIFY(L);

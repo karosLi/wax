@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Compiles the wax stdlib into one file
-lua "$PROJECT_DIR/wax/lib/build-scripts/luac.lua" wax wax.dat "$PROJECT_DIR/wax/lib/stdlib/" "$PROJECT_DIR/wax/lib/stdlib/init.lua" -L "$PROJECT_DIR/wax/lib/stdlib"/**/*.lua
+$PROJECT_DIR/wax/lib/build-scripts/lua64 "$PROJECT_DIR/wax/lib/build-scripts/luac.lua" wax wax.dat "$PROJECT_DIR/wax/lib/stdlib/" "$PROJECT_DIR/wax/lib/stdlib/init.lua" -L "$PROJECT_DIR/wax/lib/stdlib"/**/*.lua
 
 # Dumps the compiled file into a byte array, then it places this into the source code
 cat > "$PROJECT_DIR/wax/lib/wax_stdlib.h" <<EOF

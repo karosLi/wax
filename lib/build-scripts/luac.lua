@@ -52,6 +52,7 @@ for i = 1, executableIndex do
   arg[i]=string.sub(string.dump(assert(loadfile(arg[i]))), 13) -- string.sub Removes header from file  
 end
 
+print("b", b)
 b = string.dump(assert(loadstring(b, NAME)))
 local x, y = string.find(b, MARK)
 -- 64

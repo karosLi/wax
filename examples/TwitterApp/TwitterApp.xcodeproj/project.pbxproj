@@ -717,7 +717,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "\"$PROJECT_DIR/wax/lib/build-scripts/copy-scripts.sh\"";
+			shellScript = "\"$PROJECT_DIR/wax/lib/build-scripts/copy-scripts.sh\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -807,6 +807,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = " 1";
 				DEVELOPMENT_TEAM = 7M2A8Q929Y;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -814,6 +815,8 @@
 				GCC_PREFIX_HEADER = TwitterApp_Prefix.pch;
 				HEADER_SEARCH_PATHS = "$(SDK_ROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "TwitterApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TwitterApp.karos;
 				PRODUCT_NAME = TwitterApp;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
@@ -826,11 +829,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = " 1";
 				DEVELOPMENT_TEAM = 7M2A8Q929Y;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TwitterApp_Prefix.pch;
 				HEADER_SEARCH_PATHS = "$(SDK_ROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "TwitterApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TwitterApp.karos;
 				PRODUCT_NAME = TwitterApp;
 				VALIDATE_PRODUCT = YES;
