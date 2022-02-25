@@ -141,12 +141,13 @@ int wax_struct_getOffsetForName(lua_State *L, wax_struct_userdata *structUserdat
     if (lua_isnil(L, -1)) {
         luaL_error(L, "No struct mapping for '%s'", structUserdata->name);
     }
-    
+    wax_printStack(L);
     lua_getfield(L, -1, name);
     if (lua_isnil(L, -1)) {
         luaL_error(L, "No mapping for varible named '%s' for struct '%s'", name, structUserdata->name);
     }
     
+    wax_printStack(L);
     int offset = lua_tonumber(L, -1);
     
     END_STACK_MODIFY(L, 0);
@@ -249,6 +250,7 @@ static int create(lua_State *L) {
     
     lua_pushstring(L, name);
     lua_newtable(L); // create new mapping table for this labeled struct
+    
     for (int i = 1; i <= mappingsCount; i++) {
         int stackIndex = i + mappingOffset;
         lua_pushvalue(L, stackIndex); // push the mapping name
@@ -262,7 +264,7 @@ static int create(lua_State *L) {
     lua_pushvalue(L, 2); // Push the type description
     lua_pushcclosure(L, createClosure, 2);
     lua_setglobal(L, name);
-    
+    wax_printStack(L);
     return 0;
 }
 

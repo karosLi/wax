@@ -27,14 +27,14 @@
 }
 
 - (void)setMyView {
-    UIView *view = [UIView new];
-    [self.view addSubview:view];
-    view.backgroundColor = [UIColor greenColor];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        make.width.offset(50);
-        make.height.offset(50);
-    }];
+//    UIView *view = [UIView new];
+//    [self.view addSubview:view];
+//    view.backgroundColor = [UIColor greenColor];
+//    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.center.equalTo(self.view);
+//        make.width.offset(50);
+//        make.height.offset(50);
+//    }];
 }
 
 

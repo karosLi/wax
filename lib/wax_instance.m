@@ -305,7 +305,7 @@ static int __index(lua_State *L) {
     
     const char *luaIndexSelector = lua_tostring(L, 2);
     
-    if (strcmp(luaIndexSelector, "trends") == 0) {
+    if (strcmp(luaIndexSelector, "navigationController") == 0) {
         NSLog(@"");
     }
     
@@ -322,7 +322,7 @@ static int __index(lua_State *L) {
         return 1;
     }
     
-    // Check instance userdata, unless we are acting like a super
+    // Check instance userdata, unless we are acting like a super，有值就直接获取值
 	if (!instanceUserdata->actAsSuper) {
 		lua_getfenv(L, -2);
 		lua_pushvalue(L, -2);
@@ -374,6 +374,9 @@ static int __index(lua_State *L) {
                     id klass = [instanceUserdata->instance class];
                     //add SUPERselector for subclass
                     if (!selfSuperMethod){
+                        if ([NSStringFromSelector(selfSuperSelector) isEqualToString:@"viewDidLoad"]) {
+                            NSLog(@"");
+                        }
                         class_addMethod(klass, selfSuperSelector, superMethodImp, typeDescription);
                     }
                 }
@@ -607,6 +610,9 @@ static int superMethodClosure(lua_State *L) {
         SEL newSelector = sel_getUid(newSelectorName);
         id klass = [instanceUserdata->instance class];
         if(!class_respondsToSelector(klass, newSelector)) {
+            if ([NSStringFromSelector(newSelector) isEqualToString:@"viewDidLoad"]) {
+                NSLog(@"");
+            }
             class_addMethod(klass, newSelector, superMethodImp, typeDescription);
         }
 
@@ -641,10 +647,10 @@ static int customInitMethodClosure(lua_State *L) {
         luaL_error(L, "I WAS TOLD THIS WAS A CUSTOM INIT METHOD. BUT YOU LIED TO ME");
         return -1;
     }
-    
+    wax_printStack(L);
     lua_pushvalue(L, lua_upvalueindex(1)); // Grab the function!
     lua_insert(L, 1); // push it up top
-    
+    wax_printStack(L);
     if (wax_pcall(L, lua_gettop(L) - 1, 1)) {
         const char* errorString = lua_tostring(L, -1);
         luaL_error(L, "Custom init method on '%s' failed.\n%s", class_getName([instanceUserdata->instance class]), errorString);
@@ -780,6 +786,10 @@ static BOOL overrideMethod(lua_State *L, wax_instance_userdata *instanceUserdata
     BOOL success = NO;
     const char *methodName = lua_tostring(L, 2);
     
+    if (strcmp(methodName, "aaa") == 0) {
+        NSLog(@"");
+    }
+    
     SEL foundSelectors[2] = {nil, nil};
     wax_selectorForInstance(instanceUserdata, foundSelectors, methodName, YES);
     SEL selector = foundSelectors[0];
@@ -909,6 +919,9 @@ static void replaceAndGenerateWaxPrefixMethod(id klass, SEL selector, IMP newIMP
     //add wax prefix method
     SEL newSelector = wax_selectorWithPrefix(selector, WAX_REPLACE_METHOD_PREFIX);
     if(!class_respondsToSelector(klass, newSelector)) {
+        if ([NSStringFromSelector(newSelector) isEqualToString:@"viewDidLoad"]) {
+            NSLog(@"");
+        }
         class_addMethod(klass, newSelector, prevImp, typeDescription);
     }
 }
@@ -974,6 +987,9 @@ static BOOL overrideMethodByInvocation(id klass, SEL selector, char *typeDescrip
 static BOOL addMethodByInvocation(id klass, SEL selector, char * typeDescription) {
     if(!isMethodReplacedByWax(klass, @selector(forwardInvocation:))){//just replace once
         replaceAndGenerateWaxPrefixMethod(klass, @selector(forwardInvocation:), (IMP)waxForwardInvocation);
+    }
+    if ([NSStringFromSelector(selector) isEqualToString:@"viewDidLoad"]) {
+        NSLog(@"");
     }
     class_addMethod(klass, selector, _objc_msgForward, typeDescription);//for isMethodReplacedByInvocation
     

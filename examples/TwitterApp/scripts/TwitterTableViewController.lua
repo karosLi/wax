@@ -1,9 +1,13 @@
 waxClass{"TwitterTableViewController", UITableViewController}
 
+function aaa()
+  print("aaaasaaaaaaa")
+end
+
 function init(self)
   self.super:initWithStyle(UITableViewStylePlain)
   self.trends = {}
-  
+  self:aaa()
   return self
 end
 
@@ -37,4 +41,11 @@ function tableView_cellForRowAtIndexPath(self, tableView, indexPath)
   cell:textLabel():setText("1")
 
   return cell
+end
+
+function tableView_didSelectRowAtIndexPath(self, tableView, indexPath)
+  -- 看下 navigationController 是怎么调用的
+  -- self:navigationController():pushViewController_animated(nil, true)
+  
+  print("self:navigationController()", self:navigationController())
 end
