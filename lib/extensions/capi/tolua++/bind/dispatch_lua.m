@@ -10,6 +10,7 @@
 
 #include "tolua++.h"
 #include "wax_lock.h"
+#include "wax_helpers.h"
 
 /* Exported function */
 TOLUA_API int  tolua_dispatch_open (lua_State* tolua_S);
@@ -256,6 +257,7 @@ static int tolua_dispatch_dispatch_sync00(lua_State* tolua_S)
 #ifndef TOLUA_DISABLE_tolua_dispatch_dispatch_after00
 static int tolua_dispatch_dispatch_after00(lua_State* tolua_S)
 {
+     wax_printStack(tolua_S);
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (

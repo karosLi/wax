@@ -13,7 +13,7 @@
 		00767BA11C325B3000807A54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00767B9F1C325B3000807A54 /* Main.storyboard */; };
 		00767BA31C325B3000807A54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00767BA21C325B3000807A54 /* Assets.xcassets */; };
 		00767BA61C325B3000807A54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00767BA41C325B3000807A54 /* LaunchScreen.storyboard */; };
-		00BF35401C7F279B000A62DE /* BlockExample.lua in Resources */ = {isa = PBXBuildFile; fileRef = 00BF353F1C7F279B000A62DE /* BlockExample.lua */; settings = {ASSET_TAGS = (); }; };
+		00BF35401C7F279B000A62DE /* BlockExample.lua in Resources */ = {isa = PBXBuildFile; fileRef = 00BF353F1C7F279B000A62DE /* BlockExample.lua */; };
 		5AD1D06E593616AAB26A5BBF /* libPods-BlockExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B72215A85CD11D94405880 /* libPods-BlockExample.a */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +147,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

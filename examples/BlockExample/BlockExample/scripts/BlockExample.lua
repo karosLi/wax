@@ -1,16 +1,14 @@
 waxClass{"ViewController"}
 
-
-
 function setMyView(self)
-	print(self:getIvarInteger("_aInteger"))
-	print(self:getIvarCGFloat("_aCGFloat"))
+    print(self:getIvarInteger("_aInteger"))
+    print(self:getIvarCGFloat("_aCGFloat"))
 
-	self:setIvar_withInteger("_aInteger", 567)
-	self:setIvar_withCGFloat("_aCGFloat", 567.89)
+    self:setIvar_withInteger("_aInteger", 567)
+    self:setIvar_withCGFloat("_aCGFloat", 567.89)
 
-	print(self:getIvarInteger("_aInteger"))
-	print(self:getIvarCGFloat("_aCGFloat"))
+    print(self:getIvarInteger("_aInteger"))
+    print(self:getIvarCGFloat("_aCGFloat"))
     local view = UIView:init()
     self:view():addSubview(view)
     view:setBackgroundColor(UIColor:greenColor())
@@ -38,4 +36,10 @@ function setMyView2(self)
       end
       ,{"void", "MASConstraintMaker *"}))
     print("lua setMyView2")
+end
+
+function argInRect(self, vRect)
+    vRect.x = 10
+    self:setVRect(vRect)
+    return vRect
 end

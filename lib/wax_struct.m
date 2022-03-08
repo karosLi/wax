@@ -224,7 +224,7 @@ static int __tostring(lua_State *L) {
         
         luaL_pushresult(&b);
     }
-    
+    wax_printStack(L);
     return 1;
 }
 

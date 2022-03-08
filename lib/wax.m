@@ -216,7 +216,7 @@ static void addGlobals(lua_State *L) {
     lua_setfield(L, -2, "root");
 
     lua_pushcfunction(L, waxPrint);
-    lua_setfield(L, -2, "print");    
+    lua_setfield(L, -2, "print");
     
 #ifdef DEBUG
     lua_pushboolean(L, YES);

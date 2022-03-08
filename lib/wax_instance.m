@@ -407,6 +407,10 @@ static int __newindex(lua_State *L) {
     if (strcmp(key, "trends") == 0) {
         NSLog(@"");
     }
+    
+    if (strcmp(key, "argInRect") == 0) {
+        NSLog(@"");
+    }
     // If this already exists in a protocol, or superclass make sure it will call the lua functions
     if (instanceUserdata->isClass && lua_type(L, 3) == LUA_TFUNCTION) {
         overrideMethod(L, instanceUserdata);
@@ -549,7 +553,9 @@ static int methodClosure(lua_State *L) {
     if (methodReturnLength > 0) {
         void *buffer = calloc(1, methodReturnLength);
         [invocation getReturnValue:buffer];
-            
+        if (strcmp([signature methodReturnType], "@?") == 0) {
+            NSLog(@"");
+        }
         wax_fromObjc(L, [signature methodReturnType], buffer);
                 
         if (autoAlloc) {
@@ -698,6 +704,10 @@ static int pcallUserdataARM64Invocation(lua_State *L, id self, SEL selector, NSI
         goto error;
     }
     
+    if ([@"argInRect:" isEqualToString:NSStringFromSelector(selector)]) {
+        NSLog(@"");
+    }
+    
     NSMethodSignature *signature = [self methodSignatureForSelector:selector];
     int nargs = (int)[signature numberOfArguments] - 1; // Don't send in the _cmd argument, only self
     int nresults = [signature methodReturnLength] ? 1 : 0;
@@ -756,6 +766,10 @@ static int pcallUserdataARM64ImpCall(lua_State *L, id self, SEL selector, va_lis
         goto error;
     }
     
+    if ([@"argInRect:" isEqualToString:NSStringFromSelector(selector)]) {
+        NSLog(@"");
+    }
+    
     NSMethodSignature *signature = [self methodSignatureForSelector:selector];
     NSUInteger nargs = [signature numberOfArguments] - 1; // Don't send in the _cmd argument, only self
     int nresults = [signature methodReturnLength] ? 1 : 0;
@@ -786,7 +800,7 @@ static BOOL overrideMethod(lua_State *L, wax_instance_userdata *instanceUserdata
     BOOL success = NO;
     const char *methodName = lua_tostring(L, 2);
     
-    if (strcmp(methodName, "aaa") == 0) {
+    if (strcmp(methodName, "argInRect") == 0) {
         NSLog(@"");
     }
     
@@ -929,6 +943,9 @@ static void replaceAndGenerateWaxPrefixMethod(id klass, SEL selector, IMP newIMP
 static void waxForwardInvocation(id self, SEL sel, NSInvocation *anInvocation){
 //    NSLog(@"self=%@ sel=%s", self, anInvocation.selector);
 //    NSLog(@"Fun:%s Line:%d", __PRETTY_FUNCTION__, __LINE__);
+    if ([NSStringFromSelector(anInvocation.selector) isEqualToString:@"argInRect:"]) {
+        NSLog(@"");
+    }
     if(isMethodReplacedByWax(object_getClass(self), anInvocation.selector)){//instance->class, class->metaClass
 //        NSLog(@"Fun:%s Line:%d", __PRETTY_FUNCTION__, __LINE__);
         lua_State *L = wax_currentLuaState();

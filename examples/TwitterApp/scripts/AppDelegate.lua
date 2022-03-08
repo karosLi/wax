@@ -7,6 +7,7 @@ waxClass{"AppDelegate", protocols = {"UIApplicationDelegate"}}
 function applicationDidFinishLaunching(self, application)
   local f = CGSize(33.0,44.0)
   local a = f.width
+  print("结构体", tostring(f))
   local frame = UIScreen:mainScreen():bounds()
   self.window = UIWindow:initWithFrame(frame)
   self.window:setBackgroundColor(UIColor:orangeColor())

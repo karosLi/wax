@@ -8,17 +8,49 @@
 
 #import "ViewController.h"
 #import <Masonry/Masonry.h>
+
+typedef struct _XPoint
+{
+    int x;
+    int y;
+}XPoint;
+
+
 @interface ViewController ()
 {
     NSInteger _aInteger;
     CGFloat _aCGFloat;
 }
+@property (nonatomic) XPoint vP;
+@property (nonatomic) CGRect vRect;
 @end
 
 @implementation ViewController
 
+- (XPoint)argInXPoint:(XPoint)vXPoint
+{
+    return vXPoint;
+}
+
+- (CGRect)argInRect:(CGRect)vRect
+{
+    return vRect;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    XPoint xp;
+    xp.x = 3;
+    xp.y = 4;
+    XPoint p = [self argInXPoint:xp];
+    
+    CGRect xrect;
+    xrect.origin.x = 3.0;
+    xrect.origin.y = 4.0;
+    xrect.size.width = 5.0;
+    xrect.size.height = 6.0;
+    CGRect rect = [self argInRect:xrect];
+    
     // Do any additional setup after loading the view, typically from a nib.
     _aInteger = 1234;
     _aCGFloat = 456;
